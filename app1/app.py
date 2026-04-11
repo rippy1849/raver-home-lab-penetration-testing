@@ -7,6 +7,7 @@ FOR EDUCATIONAL / CTF USE ONLY
 import sqlite3
 import os
 import base64
+import time
 import json
 import requests
 import subprocess
@@ -53,7 +54,7 @@ def caesar_cipher(text, shift=13):
 
 def write_secret_files():
     # LFI flag file
-    lfi_flag = os.path.join(SECRET_DIR, "flag.txt")
+    lfi_flag = os.path.join(SECRET_DIR, "flag4.txt")
     if not os.path.exists(lfi_flag):
         with open(lfi_flag, "w") as f:
             f.write("flag4{lf1_tr4v3rs4l_f1l3_r34d_rav3r_pwn3d}\n")
@@ -202,7 +203,8 @@ def init_db():
 def login_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
-        if "user_id" not in session:
+        # Only the signed Flask session is valid — flag10 cookie grants nothing
+        if "username" not in session:
             return redirect(url_for("login"))
         return f(*args, **kwargs)
     return decorated
@@ -214,6 +216,22 @@ def admin_required(f):
             return "Access Denied — Admins Only 🚫", 403
         return f(*args, **kwargs)
     return decorated
+
+def bot_visits():
+    import urllib.request, urllib.parse
+    time.sleep(5)
+    while True:
+        try:
+            opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor())
+            opener.open(
+                "http://127.0.0.1:5000/login",
+                urllib.parse.urlencode({"username": "griz", "password": "funkysax123"}).encode(),
+            )
+            opener.open("http://127.0.0.1:5000/forum")
+            opener.open("http://127.0.0.1:5000/messages")
+        except Exception:
+            pass
+        time.sleep(30)
 
 # ══════════════════════════════════════════════
 # ROUTES
@@ -229,34 +247,30 @@ def index():
 # ──────────────────────────────────────────────
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    error = None
+    error = ""
     if request.method == "POST":
-        username = request.form.get("username", "")
-        password = request.form.get("password", "")
-
-        # ⚠️  LOG POISONING VECTOR — raw username written to log
-        # Attacker sends:  <?php system($_GET['cmd']); ?>  as username
-        log_event(f"Login attempt for user: {username}")
-
-        # ⚠️  SQL INJECTION — no parameterisation
-        query = f"SELECT * FROM users WHERE username='{username}' AND password='{password}'"
-        try:
-            db  = get_db()
-            cur = db.execute(query)
-            user = cur.fetchone()
-        except Exception as e:
-            error = f"DB Error: {e}"
-            return render_template("login.html", error=error)
-
+        u = request.form.get("username", "")
+        p = hashlib.md5(request.form.get("password", "").encode()).hexdigest()
+        db = get_db()
+        user = db.execute(
+            "SELECT * FROM users WHERE username=? AND password=?", (u, p)
+        ).fetchone()
+        db.close()
         if user:
-            session["user_id"]  = user["id"]
             session["username"] = user["username"]
-            session["role"]     = user["role"]
-            return redirect(url_for("dashboard"))
-        else:
-            error = "Invalid credentials. The vibe check failed 💀"
-
-    return render_template("login.html", error=error)
+            session["is_admin"] = bool(user["is_admin"])
+            resp = make_response(redirect(url_for("index")))
+            if user["username"] == "griz":
+                # flag10 cookie — readable by JS (httponly=False) but not a valid session token
+                resp.set_cookie(
+                    "flag10",
+                    FLAG_10,
+                    httponly=False,   # intentional — XSS target
+                    samesite="Lax",
+                )
+            return resp
+        error = "Invalid username or password."
+    return render_template("login.html", active="", error=error)
 
 @app.route("/logout")
 def logout():

