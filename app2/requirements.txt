@@ -3,5 +3,4 @@ pyjwt
 requests
 selenium
 markupsafe
-gunicorn
 waitress
