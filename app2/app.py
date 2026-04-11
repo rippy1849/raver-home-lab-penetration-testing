@@ -586,7 +586,7 @@ def bot_visits():
 #     print("\n  DropZone CTF — http://0.0.0.0:5000\n")
 #     serve(app, host="0.0.0.0", port=5000, threads=8)
 
-if __name__ == "__main__":
-    write_flag12()
-    init_db()
-    app.run(debug=True, host="0.0.0.0", port=5000)
+# if __name__ == "__main__":
+write_flag12()
+init_db()
+app.run(debug=True, host="0.0.0.0", port=5000)
