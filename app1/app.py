@@ -461,17 +461,54 @@ def serve_upload(filename):
         return "File not found", 404
 
     if filename.endswith(".phtml"):
-        cmd = request.args.get("cmd", "")
-        if cmd:
+        try:
+            # Execute the PHP file directly with php-cli
+            # Pass any GET params as environment variables so $_GET works
+            env = os.environ.copy()
+            env["QUERY_STRING"] = request.query_string.decode()
+
+            # Build $_GET superglobal from query string
+            for key, value in request.args.items():
+                env[f"PHP_VAR_{key}"] = value
+
+            # Write a small wrapper that sets $_GET and includes the file
+            wrapper = f"""<?php
+$parts = array();
+parse_str(getenv('QUERY_STRING'), $_GET);
+include('{filepath}');
+?>"""
+            wrapper_path = os.path.join(UPLOAD_DIR, f"_wrapper_{filename}")
+            with open(wrapper_path, "w") as f:
+                f.write(wrapper)
+
+            proc = subprocess.Popen(
+                ["php", wrapper_path],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                env=env
+            )
+
             try:
-                # ⚠️  RCE — flag is in secret/flag6.txt, not shown in browser
-                out = subprocess.check_output(
-                    cmd, shell=True, stderr=subprocess.STDOUT
-                ).decode()
-                return f"<pre>{out}</pre>"
-            except Exception as e:
-                return f"<pre>Error: {e}</pre>"
-        return "<pre>Shell ready. Use ?cmd=&lt;command&gt;</pre>"
+                stdout, stderr = proc.communicate(timeout=35)
+                output = stdout.decode(errors="replace")
+                if stderr:
+                    output += stderr.decode(errors="replace")
+                return f"<pre>{output}</pre>" if output else ("", 200)
+            except subprocess.TimeoutExpired:
+                # Shell connected — let it hang
+                proc.wait()
+                return "", 200
+
+        except FileNotFoundError:
+            return "<pre>Error: php-cli is not installed on this server.</pre>", 500
+        except Exception as e:
+            return f"<pre>Error: {e}</pre>", 500
+        finally:
+            # Clean up wrapper file
+            try:
+                os.remove(wrapper_path)
+            except Exception:
+                pass
 
     return send_file(filepath)
 
