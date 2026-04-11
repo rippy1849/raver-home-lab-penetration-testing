@@ -347,3 +347,187 @@
 2026-04-11 10:23:14,578 - INFO - 127.0.0.1 - - [11/Apr/2026 10:23:14] "GET /artists?file=../secret/flag5.txt HTTP/1.1" 200 -
 2026-04-11 10:24:49,398 - INFO - 127.0.0.1 - - [11/Apr/2026 10:24:49] "GET / HTTP/1.1" 200 -
 2026-04-11 10:24:50,489 - INFO - 127.0.0.1 - - [11/Apr/2026 10:24:50] "GET /ravers/love/small/easter/egg/sidequests HTTP/1.1" 200 -
+2026-04-11 14:22:33,601 - INFO - Serving on http://0.0.0.0:5000
+2026-04-11 14:22:48,136 - ERROR - Exception on /login [POST]
+Traceback (most recent call last):
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\fweep\OneDrive\Documents\Code\raver-home-lab-penetration-testing\app1\app.py", line 255, in login
+    p = hashlib.md5(request.form.get("password", "").encode()).hexdigest()
+        ^^^^^^^
+NameError: name 'hashlib' is not defined. Did you forget to import 'hashlib'?
+2026-04-11 14:23:10,962 - ERROR - Exception on /login [POST]
+Traceback (most recent call last):
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\fweep\OneDrive\Documents\Code\raver-home-lab-penetration-testing\app1\app.py", line 255, in login
+    p = hashlib.md5(request.form.get("password", "").encode()).hexdigest()
+        ^^^^^^^
+NameError: name 'hashlib' is not defined. Did you forget to import 'hashlib'?
+2026-04-11 14:23:17,108 - INFO - Serving on http://0.0.0.0:5000
+2026-04-11 14:23:42,494 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.132.157.156:5000
+2026-04-11 14:23:42,494 - INFO - [33mPress CTRL+C to quit[0m
+2026-04-11 14:23:47,274 - INFO - 127.0.0.1 - - [11/Apr/2026 14:23:47] "GET /login HTTP/1.1" 200 -
+2026-04-11 14:23:48,540 - ERROR - Exception on /login [POST]
+Traceback (most recent call last):
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\fweep\OneDrive\Documents\Code\raver-home-lab-penetration-testing\app1\app.py", line 255, in login
+    p = hashlib.md5(request.form.get("password", "").encode()).hexdigest()
+        ^^^^^^^
+NameError: name 'hashlib' is not defined. Did you forget to import 'hashlib'?
+2026-04-11 14:23:48,545 - INFO - 127.0.0.1 - - [11/Apr/2026 14:23:48] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+2026-04-11 14:23:50,914 - INFO - 127.0.0.1 - - [11/Apr/2026 14:23:50] "GET / HTTP/1.1" 200 -
+2026-04-11 14:23:57,137 - INFO - 127.0.0.1 - - [11/Apr/2026 14:23:57] "GET / HTTP/1.1" 200 -
+2026-04-11 14:23:59,938 - INFO - 127.0.0.1 - - [11/Apr/2026 14:23:59] "[32mGET /artists HTTP/1.1[0m" 302 -
+2026-04-11 14:24:00,190 - INFO - File read: C:\Users\fweep\OneDrive\Documents\Code\raver-home-lab-penetration-testing\app1\static\artists.txt
+[2026-04-11 14:24:00.190315] File read: C:\Users\fweep\OneDrive\Documents\Code\raver-home-lab-penetration-testing\app1\static\artists.txt
+2026-04-11 14:24:00,197 - INFO - 127.0.0.1 - - [11/Apr/2026 14:24:00] "GET /artists?file=artists.txt HTTP/1.1" 200 -
+2026-04-11 14:24:01,695 - INFO - 127.0.0.1 - - [11/Apr/2026 14:24:01] "GET /login HTTP/1.1" 200 -
+2026-04-11 14:24:03,498 - ERROR - Exception on /login [POST]
+Traceback (most recent call last):
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\fweep\OneDrive\Documents\Code\raver-home-lab-penetration-testing\app1\app.py", line 255, in login
+    p = hashlib.md5(request.form.get("password", "").encode()).hexdigest()
+        ^^^^^^^
+NameError: name 'hashlib' is not defined. Did you forget to import 'hashlib'?
+2026-04-11 14:24:03,500 - INFO - 127.0.0.1 - - [11/Apr/2026 14:24:03] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+2026-04-11 14:26:36,782 - INFO - Serving on http://0.0.0.0:5000
+2026-04-11 14:26:45,071 - ERROR - Exception on /login [POST]
+Traceback (most recent call last):
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\fweep\OneDrive\Documents\Code\raver-home-lab-penetration-testing\app1\app.py", line 255, in login
+    p = hashlib.md5(request.form.get("password", "").encode()).hexdigest()
+        ^^^^^^^
+NameError: name 'hashlib' is not defined. Did you forget to import 'hashlib'?
+2026-04-11 14:26:47,485 - ERROR - Exception on /login [POST]
+Traceback (most recent call last):
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\fweep\OneDrive\Documents\Code\raver-home-lab-penetration-testing\app1\app.py", line 255, in login
+    p = hashlib.md5(request.form.get("password", "").encode()).hexdigest()
+        ^^^^^^^
+NameError: name 'hashlib' is not defined. Did you forget to import 'hashlib'?
+2026-04-11 14:28:11,520 - INFO - Serving on http://0.0.0.0:5000
+2026-04-11 14:28:14,012 - INFO - Serving on http://0.0.0.0:5000
+2026-04-11 14:28:24,315 - ERROR - Exception on /login [POST]
+Traceback (most recent call last):
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\fweep\anaconda3\envs\website\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\fweep\OneDrive\Documents\Code\raver-home-lab-penetration-testing\app1\app.py", line 255, in login
+    p = hashlib.md5(request.form.get("password", "").encode()).hexdigest()
+        ^^^^^^^
+NameError: name 'hashlib' is not defined. Did you forget to import 'hashlib'?
+2026-04-11 14:28:58,336 - INFO - Serving on http://0.0.0.0:5000
+2026-04-11 14:29:46,846 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.132.157.156:5000
+2026-04-11 14:29:46,846 - INFO - [33mPress CTRL+C to quit[0m
+2026-04-11 14:29:46,848 - INFO -  * Restarting with stat
+2026-04-11 14:29:47,305 - WARNING -  * Debugger is active!
+2026-04-11 14:29:47,309 - INFO -  * Debugger PIN: 790-337-215
+2026-04-11 14:29:52,501 - INFO - 127.0.0.1 - - [11/Apr/2026 14:29:52] "GET / HTTP/1.1" 200 -
+2026-04-11 14:29:54,494 - INFO - 127.0.0.1 - - [11/Apr/2026 14:29:54] "GET /login HTTP/1.1" 200 -
+2026-04-11 14:29:56,013 - INFO - 127.0.0.1 - - [11/Apr/2026 14:29:56] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+2026-04-11 14:29:56,297 - INFO - 127.0.0.1 - - [11/Apr/2026 14:29:56] "GET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2026-04-11 14:29:56,343 - INFO - 127.0.0.1 - - [11/Apr/2026 14:29:56] "GET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2026-04-11 14:29:56,387 - INFO - 127.0.0.1 - - [11/Apr/2026 14:29:56] "GET /login?__debugger__=yes&cmd=resource&f=console.png&s=QKDckqTvD0H4h6aT8wy3 HTTP/1.1" 200 -
+2026-04-11 14:29:56,707 - INFO - 127.0.0.1 - - [11/Apr/2026 14:29:56] "GET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2026-04-11 14:30:15,395 - INFO -  * Detected change in 'C:\\Users\\fweep\\OneDrive\\Documents\\Code\\raver-home-lab-penetration-testing\\app1\\app.py', reloading
+2026-04-11 14:30:15,432 - INFO -  * Restarting with stat
+2026-04-11 14:30:15,864 - WARNING -  * Debugger is active!
+2026-04-11 14:30:15,867 - INFO -  * Debugger PIN: 790-337-215
+2026-04-11 14:30:18,893 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.132.157.156:5000
+2026-04-11 14:30:18,893 - INFO - [33mPress CTRL+C to quit[0m
+2026-04-11 14:30:18,894 - INFO -  * Restarting with stat
+2026-04-11 14:30:19,365 - WARNING -  * Debugger is active!
+2026-04-11 14:30:19,368 - INFO -  * Debugger PIN: 790-337-215
+2026-04-11 14:30:24,007 - INFO - 127.0.0.1 - - [11/Apr/2026 14:30:24] "POST /login HTTP/1.1" 200 -
+2026-04-11 14:30:26,369 - INFO - 127.0.0.1 - - [11/Apr/2026 14:30:26] "POST /login HTTP/1.1" 200 -
+2026-04-11 14:31:01,214 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.132.157.156:5000
+2026-04-11 14:31:01,214 - INFO - [33mPress CTRL+C to quit[0m
+2026-04-11 14:31:01,215 - INFO -  * Restarting with stat
+2026-04-11 14:31:01,643 - WARNING -  * Debugger is active!
+2026-04-11 14:31:01,646 - INFO -  * Debugger PIN: 790-337-215
+2026-04-11 14:31:16,624 - INFO - 127.0.0.1 - - [11/Apr/2026 14:31:16] "POST /login HTTP/1.1" 200 -
+2026-04-11 14:32:23,890 - INFO -  * Detected change in 'C:\\Users\\fweep\\OneDrive\\Documents\\Code\\raver-home-lab-penetration-testing\\app1\\app.py', reloading
+2026-04-11 14:32:23,928 - INFO -  * Restarting with stat
+2026-04-11 14:32:24,402 - WARNING -  * Debugger is active!
+2026-04-11 14:32:24,405 - INFO -  * Debugger PIN: 790-337-215
+2026-04-11 14:32:27,537 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.132.157.156:5000
+2026-04-11 14:32:27,537 - INFO - [33mPress CTRL+C to quit[0m
+2026-04-11 14:32:27,539 - INFO -  * Restarting with stat
+2026-04-11 14:32:28,004 - WARNING -  * Debugger is active!
+2026-04-11 14:32:28,007 - INFO -  * Debugger PIN: 790-337-215
+2026-04-11 14:32:29,898 - INFO - Login attempt for user: griz_fan
+[2026-04-11 14:32:29.898300] Login attempt for user: griz_fan
+2026-04-11 14:32:29,899 - INFO - 127.0.0.1 - - [11/Apr/2026 14:32:29] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-04-11 14:32:30,166 - INFO - 127.0.0.1 - - [11/Apr/2026 14:32:30] "GET /dashboard HTTP/1.1" 200 -
+2026-04-11 14:33:23,742 - INFO - Serving on http://0.0.0.0:5000
+2026-04-11 14:33:31,770 - INFO - Login attempt for user: griz_fan
+[2026-04-11 14:33:31.771453] Login attempt for user: griz_fan
+2026-04-11 14:34:01,045 - INFO - Serving on http://0.0.0.0:5000

@@ -12,39 +12,16 @@
     </div>
   {% endif %}
 
-  {% if user_token %}
-    <div class='card' style='margin-bottom:24px'>
-      <div class='card-header'><span class='card-title'>Your Access Token</span></div>
-      <p style='color:var(--muted);font-size:.85rem;margin-bottom:12px'>
-        Your current signed token. Backstage access is verified using JWT.
-      </p>
-      <pre style='font-size:.75rem;word-break:break-all;white-space:pre-wrap'>{{ user_token }}</pre>
-    </div>
+  {% if msg %}
+    <div class='alert alert-error'>{{ msg }}</div>
   {% endif %}
 
   <div class='card'>
-    <div class='card-header'><span class='card-title'>Token Verification</span></div>
-    {% if msg %}
-      <div class='alert alert-error'>{{ msg }}</div>
-    {% endif %}
-    <p style='color:var(--muted);font-size:.85rem;margin-bottom:16px'>
-      Paste a valid backstage access token to gain entry.
-    </p>
-    <form method='POST'>
-      <div class='form-group'>
-        <label>Access Token (JWT)</label>
-        <textarea class='form-control' name='token' rows='4' placeholder='eyJ...'></textarea>
-      </div>
-      <button type='submit' class='btn btn-primary'>Verify Token</button>
-    </form>
-  </div>
-
-  <div class='card' style='margin-top:20px'>
     <div class='card-header'><span class='card-title'>About Backstage Access</span></div>
     <p style='color:var(--muted);font-size:.85rem;line-height:1.7'>
-      Backstage tokens are issued to verified artists and grant access to private areas.
-      Tokens are signed — only valid tokens will be accepted.
-      Artist <strong style='color:var(--text)'>subtronics</strong> has an active backstage pass.
+      Backstage access is granted to verified artists only.<br>
+      Authentication is handled externally — contact your label manager for access credentials.<br>
+      Artist <strong style='color:var(--text)'>subtronics</strong> has an active backstage pass on file.
     </p>
   </div>
 </div>

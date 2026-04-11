@@ -10,6 +10,7 @@ import base64
 import time
 import json
 import requests
+import hashlib
 import subprocess
 import logging
 from datetime import datetime, timedelta
@@ -19,6 +20,8 @@ from flask import (
     session, make_response, send_file, jsonify, g, abort
 )
 from markupsafe import Markup
+
+from waitress import serve
 
 # ──────────────────────────────────────────────
 # App Setup
@@ -247,30 +250,32 @@ def index():
 # ──────────────────────────────────────────────
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    error = ""
+    error = None
     if request.method == "POST":
-        u = request.form.get("username", "")
-        p = hashlib.md5(request.form.get("password", "").encode()).hexdigest()
-        db = get_db()
-        user = db.execute(
-            "SELECT * FROM users WHERE username=? AND password=?", (u, p)
-        ).fetchone()
-        db.close()
+        username = request.form.get("username", "")
+        password = request.form.get("password", "")
+
+        log_event(f"Login attempt for user: {username}")
+
+        # ⚠️  VULNERABLE — no parameterisation, plaintext passwords
+        query = f"SELECT * FROM users WHERE username='{username}' AND password='{password}'"
+        try:
+            db   = get_db()
+            cur  = db.execute(query)
+            user = cur.fetchone()
+        except Exception as e:
+            error = f"DB Error: {e}"
+            return render_template("login.html", error=error)
+
         if user:
+            session["user_id"]  = user["id"]
             session["username"] = user["username"]
-            session["is_admin"] = bool(user["is_admin"])
-            resp = make_response(redirect(url_for("index")))
-            if user["username"] == "griz":
-                # flag10 cookie — readable by JS (httponly=False) but not a valid session token
-                resp.set_cookie(
-                    "flag10",
-                    FLAG_10,
-                    httponly=False,   # intentional — XSS target
-                    samesite="Lax",
-                )
-            return resp
-        error = "Invalid username or password."
-    return render_template("login.html", active="", error=error)
+            session["role"]     = user["role"]
+            return redirect(url_for("dashboard"))
+        else:
+            error = "Invalid credentials. The vibe check failed 💀"
+
+    return render_template("login.html", error=error)
 
 @app.route("/logout")
 def logout():
@@ -570,14 +575,25 @@ def easter_egg():
 # ──────────────────────────────────────────────
 # Entry Point
 # ──────────────────────────────────────────────
-if __name__ == "__main__":
-    write_secret_files()
-    init_db()
-    print("""
-    ╔══════════════════════════════════════════════════╗
-    ║   🎵  RAVER'S PARADISE  — Vuln Lab Started  🎵   ║
-    ║   http://localhost:5000                          ║
-    ║   FOR EDUCATIONAL / CTF USE ONLY                ║
-    ╚══════════════════════════════════════════════════╝
-    """)
-    app.run(debug=False, host="0.0.0.0", port=5000)
+# if __name__ == "__main__":
+#     write_secret_files()
+#     init_db()
+#     print("""
+#     ╔══════════════════════════════════════════════════╗
+#     ║   🎵  RAVER'S PARADISE  — Vuln Lab Started  🎵   ║
+#     ║   http://localhost:5000                          ║
+#     ║   FOR EDUCATIONAL / CTF USE ONLY                ║
+#     ╚══════════════════════════════════════════════════╝
+#     """)
+#     app.run(debug=True, host="0.0.0.0", port=5000)
+
+write_secret_files()
+init_db()
+print("""
+╔══════════════════════════════════════════════════╗
+║   🎵  RAVER'S PARADISE  — Vuln Lab Started  🎵   ║
+║   http://localhost:5000                          ║
+║   FOR EDUCATIONAL / CTF USE ONLY                ║
+╚══════════════════════════════════════════════════╝
+""")
+serve(app, host="0.0.0.0", port=5000)

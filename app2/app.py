@@ -7,7 +7,7 @@ Vulnerabilities: Stored XSS, CSRF, RFI, JWT None Algorithm, SSRF
 
 from flask import (
     Flask, request, session, redirect,
-    url_for, render_template, make_response
+    url_for, render_template, make_response, jsonify
 )
 from markupsafe import Markup
 import sqlite3, hashlib, jwt, requests, threading, time
@@ -451,48 +451,64 @@ def write_flag12():
 # ------------------------------------------------------------------ #
 @app.route("/backstage", methods=["GET", "POST"])
 def backstage():
-    msg          = ""
-    flag         = None
-    claimed_user = ""
-    user_token   = None
-
-    if "username" in session:
-        user_token = jwt.encode(
-            {"username": session["username"], "is_admin": session.get("is_admin", False)},
-            "super_secret_key_dont_share",
-            algorithm="HS256",
-        )
+    # Accept token from Authorization header or form POST
+    raw_token = None
 
     if request.method == "POST":
         raw_token = request.form.get("token", "")
-        try:
-            decoded = jwt.decode(
-                raw_token,
-                options={"verify_signature": False},
-                algorithms=["HS256", "none"],
-            )
-            claimed_user = decoded.get("username", "")
-            db   = get_db()
-            user = db.execute(
-                "SELECT * FROM users WHERE username=?", (claimed_user,)
-            ).fetchone()
-            db.close()
-            if user and user["flag"]:
-                flag = user["flag"]
-            elif user:
-                msg = f"Verified as {claimed_user}, but no special access found."
-            else:
-                msg = "Token rejected — unknown identity."
-        except Exception as e:
-            msg = f"Token verification failed: {e}"
+    else:
+        auth = request.headers.get("Authorization", "")
+        if auth.startswith("Bearer "):
+            raw_token = auth.split("Bearer ", 1)[1].strip()
 
-    return render_template(
-        "backstage.html", active="backstage",
-        msg=msg,
-        flag=flag,
-        claimed_user=claimed_user,
-        user_token=user_token,
+    if not raw_token:
+        return render_template("backstage.html", active="backstage",
+                               msg="", flag=None, claimed_user="")
+
+    try:
+        # Intentionally vulnerable — accepts alg:none
+        decoded = jwt.decode(
+            raw_token,
+            options={"verify_signature": False},
+            algorithms=["HS256", "none"],
+        )
+        claimed_user = decoded.get("username", "")
+        db   = get_db()
+        user = db.execute(
+            "SELECT * FROM users WHERE username=?", (claimed_user,)
+        ).fetchone()
+        db.close()
+        if user and user["flag"]:
+            return render_template("backstage.html", active="backstage",
+                                   msg="", flag=user["flag"],
+                                   claimed_user=claimed_user)
+        elif user:
+            return render_template("backstage.html", active="backstage",
+                                   msg=f"Verified as {claimed_user}, but no flag here.",
+                                   flag=None, claimed_user=claimed_user)
+        else:
+            return render_template("backstage.html", active="backstage",
+                                   msg="Token rejected — unknown identity.",
+                                   flag=None, claimed_user="")
+    except Exception as e:
+        return render_template("backstage.html", active="backstage",
+                               msg=f"Token error: {e}",
+                               flag=None, claimed_user="")
+
+
+@app.route("/token")
+@login_required
+def backstage_token():
+    token = jwt.encode(
+        {"username": session["username"], "is_admin": session.get("is_admin", False)},
+        "super_secret_key_dont_share",
+        algorithm="HS256",
     )
+    return render_template("token.html", active="", token=token)
+
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("404.html", active=""), 404
 
 # ------------------------------------------------------------------ #
 #  Bot simulation — Selenium so JS actually executes
@@ -557,12 +573,20 @@ def bot_visits():
 # ------------------------------------------------------------------ #
 #  Main
 # ------------------------------------------------------------------ #
+# runs regardless of whether started via python or gunicorn
+# runs regardless of whether started via python or waitress
+
+
+# init_db()
+# write_flag12()
+# threading.Thread(target=run_internal_server, daemon=True).start()
+
+# if __name__ == "__main__":
+#     from waitress import serve
+#     print("\n  DropZone CTF — http://0.0.0.0:5000\n")
+#     serve(app, host="0.0.0.0", port=5000, threads=8)
+
 if __name__ == "__main__":
-    init_db()
     write_flag12()
-
-    threading.Thread(target=run_internal_server, daemon=True).start()
-    threading.Thread(target=bot_visits,          daemon=True).start()
-
-    print("\n  DropZone CTF — http://0.0.0.0:5000\n")
-    app.run(debug=False, host="0.0.0.0", port=5000)
+    init_db()
+    app.run(debug=True, host="0.0.0.0", port=5000)
