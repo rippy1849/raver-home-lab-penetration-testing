@@ -58,7 +58,7 @@ def caesar_cipher(text, shift=13):
 
 def write_secret_files():
     # LFI flag file
-    lfi_flag = os.path.join(SECRET_DIR, "flag.txt")
+    lfi_flag = os.path.join(SECRET_DIR, "flag4.txt")
     if not os.path.exists(lfi_flag):
         with open(lfi_flag, "w") as f:
             f.write("flag4{lf1_tr4v3rs4l_f1l3_r34d_rav3r_pwn3d}\n")
