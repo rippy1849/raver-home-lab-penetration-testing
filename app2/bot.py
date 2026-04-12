@@ -25,7 +25,7 @@ def reset_griz_password():
 
 def make_driver():
     opts = Options()
-    opts.add_argument("--headless")
+    opts.add_argument("--headless=new")
     opts.add_argument("--no-sandbox")
     opts.add_argument("--disable-dev-shm-usage")
     opts.add_argument("--ignore-certificate-errors")
@@ -34,8 +34,9 @@ def make_driver():
     opts.add_argument("--disable-gpu")
     opts.add_argument("--disable-software-rasterizer")
     opts.add_argument("--disable-extensions")
-    opts.add_argument("--single-process")
     opts.add_argument("--remote-debugging-port=9222")
+    opts.add_argument("--window-size=1920,1080")
+    opts.add_argument("--shm-size=256m")
     opts.binary_location = "/usr/bin/google-chrome"
     opts.set_capability("goog:loggingPrefs", {"browser": "ALL"})
     service = Service(executable_path="/usr/bin/chromedriver")
