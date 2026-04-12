@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.service import Service
 
 BASE     = "http://127.0.0.1:5000"
 DB_PATH  = "bassdrop.db"
@@ -30,8 +31,15 @@ def make_driver():
     opts.add_argument("--ignore-certificate-errors")
     opts.add_argument("--disable-web-security")
     opts.add_argument("--allow-running-insecure-content")
+    opts.add_argument("--disable-gpu")
+    opts.add_argument("--disable-software-rasterizer")
+    opts.add_argument("--disable-extensions")
+    opts.add_argument("--single-process")
+    opts.add_argument("--remote-debugging-port=9222")
+    opts.binary_location = "/usr/bin/google-chrome"
     opts.set_capability("goog:loggingPrefs", {"browser": "ALL"})
-    return webdriver.Chrome(options=opts)
+    service = Service(executable_path="/usr/bin/chromedriver")
+    return webdriver.Chrome(service=service, options=opts)
 
 def bot_visits():
     while True:
