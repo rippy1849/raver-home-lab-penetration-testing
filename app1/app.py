@@ -152,12 +152,12 @@ def init_db():
     )
 
     notes = [
-        (1, 1, "VIP Guest List",         "Griz, Rezz, LSDREAM, Dom Dolla, Porter Robinson, Kesha, Galantis"),
-        (2, 2, "Setlist Wishes",         "I hope Griz plays Infinite tonight!"),
-        (3, 3, "Hypnotic Thoughts",      "The bass hypnotizes me every single time."),
-        (4, 4, "Porter Robinson Lyrics", "I will always be here for you."),
-        (5, 5, "Cosmic Notes",           "LSDREAM's Cosmic Love Tour was transcendental."),
-        (6, 1, "PRIVATE — DO NOT READ",  "flag3{1d0r_4dm1n_pr1v4t3_n0t3_exf1ltr4t3d}"),
+    (1, 1, "VIP Guest List",         "Griz, Rezz, LSDREAM, Dom Dolla, Porter Robinson, Kesha, Galantis"),
+    (2, 2, "Setlist Wishes",         "I hope Griz plays Infinite tonight!"),
+    (3, 3, "Hypnotic Thoughts",      "The bass hypnotizes me every single time."),
+    (4, 4, "Porter Robinson Lyrics", "I will always be here for you."),
+    (5, 5, "Cosmic Notes",           "LSDREAM's Cosmic Love Tour was transcendental."),
+    (6, 1, "PRIVATE — DO NOT READ",  "flag3{1d0r_4dm1n_pr1v4t3_n0t3_exf1ltr4t3d}"),
     ]
     cur.executemany(
         "INSERT OR IGNORE INTO notes (id,user_id,title,content) VALUES (?,?,?,?)",
@@ -165,8 +165,8 @@ def init_db():
     )
 
     secrets = [
-        (1, "sqli_flag",  "flag2{plur_and_p0wn_th3_d4nc3fl00r}"),
-        (2, "vip_token",  "PLUR4EVER"),
+    (1, "sqli_flag",  "flag2{plur_and_p0wn_th3_d4nc3fl00r}"),
+    (2, "vip_token",  "PLUR4EVER"),
     ]
     cur.executemany(
         "INSERT OR IGNORE INTO secrets (id,name,value) VALUES (?,?,?)",
