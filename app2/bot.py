@@ -25,7 +25,7 @@ def reset_griz_password():
 
 def make_driver():
     opts = Options()
-    opts.add_argument("--headless=new")
+    opts.add_argument("--headless")
     opts.add_argument("--no-sandbox")
     opts.add_argument("--disable-dev-shm-usage")
     opts.add_argument("--ignore-certificate-errors")
