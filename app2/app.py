@@ -26,10 +26,8 @@ app.config.update(
 
 FLAG_10 = "flag10{y0ur_c00k13_g0t_st0l3n_in_the_moshpit}"
 FLAG_11 = "flag11{csrf_dr0pp3d_l1k3_the_b4ss}"
-FLAG_12 = "flag12{rfi_sh3ll_fr0m_the_rav3_c4v3}"
 FLAG_13 = "flag13{jwt_n0n3_alg0_b4ckst4g3_p4ss}"
 FLAG_14 = "flag14{ssrf_h1t_the_1nt3rn4l_d3cks}"
-FLAG_15 = "flag15{r00t_0f_the_rav3_y0u_0wn_the_syst3m}"
 
 # ------------------------------------------------------------------ #
 #  Database
@@ -475,13 +473,6 @@ def visuals():
         result=result,
     )
 
-def write_flags():
-    with open("flag12.txt", "w") as f:
-        f.write(FLAG_12)
-    
-    # FLAG 15 — only readable after getting a shell
-    with open("flag15.txt", "w") as f:
-        f.write(FLAG_15)
 
 # ------------------------------------------------------------------ #
 #  Routes — Backstage  (JWT None Algorithm — FLAG 13)
@@ -625,7 +616,6 @@ def bot_visits():
 
 # Runs at module level — works with both waitress and direct python
 init_db()
-write_flags()
 threading.Thread(target=run_internal_server, daemon=True).start()
 
 if __name__ == "__main__":
