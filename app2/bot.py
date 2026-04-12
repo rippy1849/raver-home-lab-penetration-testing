@@ -37,6 +37,9 @@ def make_driver():
     opts.add_argument("--remote-debugging-port=9222")
     opts.add_argument("--window-size=1920,1080")
     opts.add_argument("--shm-size=256m")
+    opts.add_argument("--disable-setuid-sandbox")
+    opts.add_argument("--memory-pressure-off")
+    opts.add_argument("--max_old_space_size=4096")
     opts.binary_location = "/usr/bin/google-chrome"
     opts.set_capability("goog:loggingPrefs", {"browser": "ALL"})
     service = Service(executable_path="/usr/bin/chromedriver")
