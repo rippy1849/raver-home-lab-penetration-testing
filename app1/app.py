@@ -36,6 +36,7 @@ LOG_DIR    = os.path.join(BASE_DIR, "logs")
 LOG_FILE   = os.path.join(LOG_DIR, "app.log")
 SECRET_DIR = os.path.join(BASE_DIR, "secret")
 
+
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 os.makedirs(LOG_DIR,    exist_ok=True)
 os.makedirs(SECRET_DIR, exist_ok=True)
@@ -57,7 +58,7 @@ def caesar_cipher(text, shift=13):
 
 def write_secret_files():
     # LFI flag file
-    lfi_flag = os.path.join(SECRET_DIR, "flag4.txt")
+    lfi_flag = os.path.join(SECRET_DIR, "flag.txt")
     if not os.path.exists(lfi_flag):
         with open(lfi_flag, "w") as f:
             f.write("flag4{lf1_tr4v3rs4l_f1l3_r34d_rav3r_pwn3d}\n")
@@ -68,17 +69,23 @@ def write_secret_files():
         with open(idor_flag, "w") as f:
             f.write("flag3{1d0r_4dm1n_pr1v4t3_n0t3_exf1ltr4t3d}\n")
 
-    # Log poison RCE flag — only findable via RCE
+    # Log poison RCE flag
     rce_flag = os.path.join(SECRET_DIR, "flag5.txt")
     if not os.path.exists(rce_flag):
         with open(rce_flag, "w") as f:
             f.write("flag5{l0g_p01s0n_rce_rav3r_sh3ll_pwn3d}\n")
 
-    # File upload RCE flag — only findable via RCE
+    # File upload RCE flag
     upload_flag = os.path.join(SECRET_DIR, "flag6.txt")
     if not os.path.exists(upload_flag):
         with open(upload_flag, "w") as f:
             f.write("flag6{unr3str1ct3d_upl04d_sh3ll_pwn3d}\n")
+
+    # Root flag — only readable if player escalates to root
+    root_flag = os.path.join(SECRET_DIR, "flag16.txt")
+    if not os.path.exists(root_flag):
+        with open(root_flag, "w") as f:
+            f.write("flag16{r00t_th3_rav3_pwn3d_th3_d4nc3fl00r}\n")
 
     # Easter egg hint
     archive_dir = os.path.join(BASE_DIR, "archive")
