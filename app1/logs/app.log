@@ -549,3 +549,9 @@ NameError: name 'hashlib' is not defined. Did you forget to import 'hashlib'?
 2026-04-18 13:59:55,916 - INFO - File uploaded: axy.jpg by griz_fan
 [2026-04-18 13:59:55.917180] File uploaded: axy.jpg by griz_fan
 2026-04-18 14:00:04,987 - INFO - Serving on http://0.0.0.0:5000
+2026-04-18 20:08:05,309 - INFO - Serving on http://0.0.0.0:5000
+2026-04-18 20:08:30,007 - INFO - Login attempt for user: griz_fan
+[2026-04-18 20:08:30.010100] Login attempt for user: griz_fan
+2026-04-18 20:14:25,190 - INFO - Serving on http://0.0.0.0:5000
+2026-04-18 20:14:29,647 - INFO - Serving on http://0.0.0.0:5000
+2026-04-18 20:15:54,873 - INFO - Serving on http://0.0.0.0:5000

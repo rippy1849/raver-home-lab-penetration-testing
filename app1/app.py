@@ -563,8 +563,8 @@ def verb_tamper_get():
 def verb_tamper_post():
     token = request.form.get("token", "")
     if token == "PLUR4EVER":
-        return "flag7{v3rb_t4mp3r_b4cks74g3_p4ss}", 200
-    return "Invalid token.", 403
+        return render_template("verb_tamper.html", success=True)
+    return render_template("verb_tamper.html", success=False)
 
 # ──────────────────────────────────────────────
 # Profile (IDOR)

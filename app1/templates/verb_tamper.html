@@ -1,47 +1,61 @@
 {% extends "base.html" %}
-{% block title %}VIP Access — Raver's Paradise{% endblock %}
+{% block title %}Backstage — Raver's Paradise{% endblock %}
 {% block content %}
 
-<h1>🎟️ VIP BACKSTAGE ACCESS</h1>
+{% if success %}
 
-<div class="card">
-    <h2>RESTRICTED AREA</h2>
-    <p style="color:rgba(255,255,255,0.5); margin-bottom:1rem;">
-        This area is reserved for VIP ticket holders only.
-        Enter your VIP access token below.
+<div style="text-align:center; padding:3rem 0;">
+    <div class="float" style="font-size:5rem; margin-bottom:1rem;">🎤</div>
+    <h1 class="glow-pink">BACKSTAGE ACCESS GRANTED</h1>
+    <p style="color:var(--neon-cyan); font-family:'Orbitron',sans-serif;
+              letter-spacing:3px; margin-top:0.8rem;">
+        WELCOME TO THE INNER SANCTUM
     </p>
-
-    <form method="POST" action="/vip-access">
-        <label>VIP TOKEN</label>
-        <input type="text" name="token" placeholder="Enter your VIP token..."/>
-        <button type="submit" class="btn btn-yellow">🎟️ CLAIM ACCESS</button>
-    </form>
-
-    {% if success is not none %}
-        {% if success %}
-        <div class="alert alert-success" style="margin-top:1rem;">
-            {{ message }}<br/>
-            <strong style="color:var(--neon-yellow)">flag7{v3rb_t4mp3r_b4cks74g3_p4ss}</strong>
-        </div>
-        {% else %}
-        <div class="alert alert-danger" style="margin-top:1rem;">
-            {{ message }}
-        </div>
-        {% endif %}
-    {% endif %}
 </div>
 
-<div class="card card-neon-purple">
-    <h2>🎤 BACKSTAGE TONIGHT</h2>
-    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
-                gap:1rem; margin-top:1rem;">
-        {% for artist in ["GRiZ 🎷","REZZ 👁️","LSDREAM 🌌","Dom Dolla 🕺","Porter Robinson 🌸"] %}
-        <div style="text-align:center; padding:1rem;
-                    border:1px solid rgba(191,0,255,0.4); border-radius:8px;">
-            <p style="color:var(--neon-cyan)">{{ artist }}</p>
-        </div>
-        {% endfor %}
+<div class="alert alert-success" style="text-align:center; font-size:1.1rem;">
+    <strong style="color:var(--neon-yellow)">flag7{v3rb_t4mp3r_b4cks74g3_p4ss}</strong>
+</div>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr));
+            gap:1rem; margin:2rem 0;">
+    {% for artist in [
+        {"icon": "🎷", "name": "GRiZ",           "color": "neon-orange"},
+        {"icon": "👁️", "name": "REZZ",           "color": "neon-purple"},
+        {"icon": "🌌", "name": "LSDREAM",         "color": "neon-cyan"},
+        {"icon": "🕺", "name": "Dom Dolla",       "color": "neon-pink"},
+        {"icon": "🌸", "name": "Porter Robinson", "color": "neon-pink"}
+    ] %}
+    <div class="card card-{{ artist.color }}" style="text-align:center; padding:1.5rem;">
+        <div style="font-size:3rem; margin-bottom:0.5rem;">{{ artist.icon }}</div>
+        <h3 class="text-{{ artist.color }}" style="font-size:0.9rem;">{{ artist.name }}</h3>
+        <p style="color:rgba(255,255,255,0.5); font-size:0.8rem;">Backstage Tonight</p>
     </div>
+    {% endfor %}
 </div>
+
+<div class="card card-neon-yellow" style="text-align:center;">
+    <h2 style="color:var(--neon-yellow);">🎉 YOU'RE IN</h2>
+    <p style="color:rgba(255,255,255,0.6); line-height:1.9; margin-top:0.8rem;">
+        You bypassed the door policy and made it backstage.<br/>
+        The artists are warming up. The bass is about to drop.<br/>
+        <span style="color:var(--neon-pink)">PLUR, raver. PLUR.</span>
+    </p>
+</div>
+
+{% else %}
+
+<div style="text-align:center; padding:4rem 0;">
+    <div style="font-size:5rem; margin-bottom:1rem;">🚫</div>
+    <h1>ACCESS DENIED</h1>
+    <p style="color:rgba(255,255,255,0.5); margin-top:1rem;">
+        Invalid token. You are not on the list.
+    </p>
+    <a href="/" class="btn btn-neon" style="margin-top:2rem;">
+        🏠 BACK TO HOME
+    </a>
+</div>
+
+{% endif %}
 
 {% endblock %}
