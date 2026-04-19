@@ -616,9 +616,21 @@ def bot_visits():
 
 # Runs at module level — works with both waitress and direct python
 init_db()
+
+print("""
+╔══════════════════════════════════════════════════╗
+║   🎵  DROPZONE  — Vuln Lab Started  🎵         ║
+║   http://localhost:5000                          ║
+║   FOR EDUCATIONAL / CTF USE ONLY                ║
+╚══════════════════════════════════════════════════╝
+""")
 threading.Thread(target=run_internal_server, daemon=True).start()
 
 if __name__ == "__main__":
     from waitress import serve
-    print("\n  DropZone CTF — http://0.0.0.0:5000\n")
+
+
+    # print("\n  DropZone CTF — http://0.0.0.0:5000\n")
+
+
     serve(app, host="0.0.0.0", port=5000, threads=8)
