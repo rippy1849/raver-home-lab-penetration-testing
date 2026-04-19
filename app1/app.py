@@ -166,7 +166,7 @@ def init_db():
 
     secrets = [
     (1, "sqli_flag",  "flag2{plur_and_p0wn_th3_d4nc3fl00r}"),
-    (2, "vip_token",  "PLUR4EVER"),
+    (2, "token",  "PLUR4EVER"),
     ]
     cur.executemany(
         "INSERT OR IGNORE INTO secrets (id,name,value) VALUES (?,?,?)",

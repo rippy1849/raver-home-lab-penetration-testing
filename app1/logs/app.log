@@ -555,3 +555,9 @@ NameError: name 'hashlib' is not defined. Did you forget to import 'hashlib'?
 2026-04-18 20:14:25,190 - INFO - Serving on http://0.0.0.0:5000
 2026-04-18 20:14:29,647 - INFO - Serving on http://0.0.0.0:5000
 2026-04-18 20:15:54,873 - INFO - Serving on http://0.0.0.0:5000
+2026-04-19 10:43:38,131 - INFO - Serving on http://0.0.0.0:5000
+2026-04-19 10:43:53,438 - INFO - Login attempt for user: griz_fan
+[2026-04-19 10:43:53.438582] Login attempt for user: griz_fan
+2026-04-19 10:47:09,415 - INFO - Serving on http://0.0.0.0:5000
+2026-04-19 10:47:25,699 - INFO - Serving on http://0.0.0.0:5000
+2026-04-19 10:49:13,596 - INFO - Serving on http://0.0.0.0:5000
